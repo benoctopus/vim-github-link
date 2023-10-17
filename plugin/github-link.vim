@@ -46,9 +46,9 @@ function! s:execute_with_ref(ref, startline, endline)
 
     " Check for doc extensions and add plain query parameter, because otherwise
     " GitHub ignores the line highlight
-    if s:link =~? '\v.*\.(md|rst|markdown|mdown|mkdn|md|textile|rdoc|org|creole|mediawiki|wiki|rst|asciidoc|adoc|asc|pod)$' && s:remote =~ '.*github.*'
-        let s:link = s:link . "?plain=1"
-    endif
+    " if s:link =~? '\v.*\.(md|rst|markdown|mdown|mkdn|md|textile|rdoc|org|creole|mediawiki|wiki|rst|asciidoc|adoc|asc|pod)$' && s:remote =~ '.*github.*'
+    "     let s:link = s:link . "?plain=1"
+    " endif
 
     if a:startline == a:endline
         let s:link = s:link . "#L" . a:startline
@@ -59,7 +59,7 @@ function! s:execute_with_ref(ref, startline, endline)
             let s:link = s:link . "#L" . a:startline . "-". a:endline
         endif
     endif
-    let s:link = substitute(s:link, "[\n\t ]", "", "g")
+    let s:link = substitute(s:link, "[\n\t]", "", "g")
     let @+ = s:link
     echo 'copied ' . s:link
 endfunction
